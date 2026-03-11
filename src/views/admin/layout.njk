@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }} | Admin — All About Shiva</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body class="admin-body">
+<div class="admin-wrapper">
+  <!-- Sidebar -->
+  <aside class="admin-sidebar">
+    <div class="admin-brand">
+      <span class="admin-om">ॐ</span>
+      <div>
+        <div class="admin-brand-name">All About Shiva</div>
+        <div class="admin-brand-sub">Admin Panel</div>
+      </div>
+    </div>
+    <nav class="admin-nav">
+      <a href="/admin" class="admin-nav-link {% if currentPath == '/admin' %}active{% endif %}">📊 Dashboard</a>
+      <div class="admin-nav-group">Content</div>
+      <a href="/admin/names" class="admin-nav-link {% if '/admin/names' in currentPath %}active{% endif %}">📛 Names</a>
+      <a href="/admin/mantras" class="admin-nav-link {% if '/admin/mantras' in currentPath %}active{% endif %}">🕉️ Mantras</a>
+      <a href="/admin/vedas" class="admin-nav-link {% if '/admin/vedas' in currentPath %}active{% endif %}">📜 Vedas</a>
+      <a href="/admin/stotras" class="admin-nav-link {% if '/admin/stotras' in currentPath %}active{% endif %}">🙏 Stotras</a>
+      <a href="/admin/ornaments" class="admin-nav-link {% if '/admin/ornaments' in currentPath %}active{% endif %}">🌙 Ornaments</a>
+      <div class="admin-nav-group">Site</div>
+      <a href="/admin/events" class="admin-nav-link {% if '/admin/events' in currentPath %}active{% endif %}">📅 Events</a>
+      <a href="/admin/pages" class="admin-nav-link {% if '/admin/pages' in currentPath %}active{% endif %}">📄 Pages</a>
+      <div class="admin-nav-group">Account</div>
+      <a href="/" class="admin-nav-link" target="_blank">🌐 View Site</a>
+      <a href="/admin/logout" class="admin-nav-link logout-link">🚪 Logout</a>
+    </nav>
+  </aside>
+
+  <!-- Main content -->
+  <div class="admin-main">
+    <header class="admin-topbar">
+      <h1 class="admin-page-title">{{ title }}</h1>
+      <span class="admin-user">Welcome, {{ adminName }}</span>
+    </header>
+
+    <div class="admin-content">
+      {% if flash_success and flash_success.length > 0 %}
+        {% for msg in flash_success %}
+        <div class="alert alert-success">{{ msg }}</div>
+        {% endfor %}
+      {% endif %}
+      {% if flash_error and flash_error.length > 0 %}
+        {% for msg in flash_error %}
+        <div class="alert alert-error">{{ msg }}</div>
+        {% endfor %}
+      {% endif %}
+
+      {% block content %}{% endblock %}
+    </div>
+  </div>
+</div>
+<script src="/js/admin.js"></script>
+</body>
+</html>

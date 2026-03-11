@@ -1,0 +1,25 @@
+{% extends "public/layout.njk" %}
+{% block content %}
+<div class="container section">
+  <a href="/names" class="back-link">← Back to Names</a>
+  <article class="detail-page">
+    <header class="detail-header">
+      <div class="detail-om">ॐ</div>
+      <h1 class="detail-title">{{ name.name }}</h1>
+      <span class="detail-meta">{{ name.language }}</span>
+    </header>
+    <div class="detail-body">
+      <section class="detail-section">
+        <h2>Meaning</h2>
+        <p class="detail-meaning">{{ name.meaning }}</p>
+      </section>
+      {% if name.story %}
+      <section class="detail-section">
+        <h2>The Story Behind This Name</h2>
+        <div class="detail-story">{{ name.story | nl2br | safe }}</div>
+      </section>
+      {% endif %}
+    </div>
+  </article>
+</div>
+{% endblock %}

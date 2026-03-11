@@ -1,0 +1,28 @@
+{% extends "public/layout.njk" %}
+{% block content %}
+<div class="page-hero">
+  <div class="container">
+    <h1 class="page-title">Ornaments of Shiva</h1>
+    <p class="page-subtitle">Every element that adorns the Lord carries profound cosmic meaning.</p>
+  </div>
+</div>
+<div class="container section">
+  <form class="search-form" method="GET" action="/ornaments">
+    <input type="text" name="search" value="{{ search }}" placeholder="Search ornaments or body parts…" class="search-input">
+    <button type="submit" class="btn-primary">Search</button>
+    {% if search %}<a href="/ornaments" class="btn-outline">Clear</a>{% endif %}
+  </form>
+  <div class="names-grid">
+    {% for o in rows %}
+    <a href="/ornaments/{{ o.id }}" class="name-card ornament-card">
+      <div class="ornament-part-tag">{{ o.body_part }}</div>
+      <h3 class="name-title">{{ o.name }}</h3>
+      <p class="name-meaning">{{ o.meaning | truncate(90) }}</p>
+    </a>
+    {% else %}
+    <p class="no-results">No ornaments found.</p>
+    {% endfor %}
+  </div>
+  {% include "public/partials/pagination.njk" %}
+</div>
+{% endblock %}

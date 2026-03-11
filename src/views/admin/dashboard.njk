@@ -1,0 +1,40 @@
+{% extends "admin/layout.njk" %}
+{% block content %}
+<div class="dashboard-grid">
+  <a href="/admin/names" class="stat-card">
+    <div class="stat-icon">📛</div>
+    <div class="stat-number">{{ counts.names }}</div>
+    <div class="stat-label">Names of Shiva</div>
+  </a>
+  <a href="/admin/mantras" class="stat-card">
+    <div class="stat-icon">🕉️</div>
+    <div class="stat-number">{{ counts.mantras }}</div>
+    <div class="stat-label">Mantras</div>
+  </a>
+  <a href="/admin/stotras" class="stat-card">
+    <div class="stat-icon">🙏</div>
+    <div class="stat-number">{{ counts.stotras }}</div>
+    <div class="stat-label">Stotras</div>
+  </a>
+  <a href="/admin/events" class="stat-card">
+    <div class="stat-icon">📅</div>
+    <div class="stat-number">{{ counts.events }}</div>
+    <div class="stat-label">Events</div>
+  </a>
+  <a href="/admin/ornaments" class="stat-card">
+    <div class="stat-icon">🌙</div>
+    <div class="stat-number">{{ counts.ornaments }}</div>
+    <div class="stat-label">Ornaments</div>
+  </a>
+</div>
+<div class="quick-actions">
+  <h2>Quick Actions</h2>
+  <div class="action-links">
+    <a href="/admin/names/new" class="btn-admin-primary">+ Add Name</a>
+    <a href="/admin/mantras/new" class="btn-admin-primary">+ Add Mantra</a>
+    <a href="/admin/stotras/new" class="btn-admin-primary">+ Add Stotra</a>
+    <a href="/admin/events/new" class="btn-admin-primary">+ Add Event</a>
+    <a href="/admin/ornaments/new" class="btn-admin-primary">+ Add Ornament</a>
+  </div>
+</div>
+{% endblock %}

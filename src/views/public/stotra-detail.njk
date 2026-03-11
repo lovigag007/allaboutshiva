@@ -1,0 +1,29 @@
+{% extends "public/layout.njk" %}
+{% block content %}
+<div class="container section">
+  <a href="/stotras" class="back-link">← Back to Stotras</a>
+  <article class="detail-page">
+    <header class="detail-header">
+      <div class="detail-om">🙏</div>
+      <h1 class="detail-title">{{ stotra.title }}</h1>
+      {% if stotra.written_by %}<span class="detail-meta">Composed by: {{ stotra.written_by }}</span>{% endif %}
+    </header>
+    <div class="detail-body">
+      <section class="detail-section mantra-text-section">
+        <h2>Stotra Text</h2>
+        <div class="sanskrit-text">{{ stotra.text | nl2br | safe }}</div>
+      </section>
+      <section class="detail-section">
+        <h2>Meaning</h2>
+        <p>{{ stotra.meaning | nl2br | safe }}</p>
+      </section>
+      {% if stotra.story %}
+      <section class="detail-section">
+        <h2>Story & History</h2>
+        <div class="detail-story">{{ stotra.story | nl2br | safe }}</div>
+      </section>
+      {% endif %}
+    </div>
+  </article>
+</div>
+{% endblock %}

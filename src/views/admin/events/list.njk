@@ -1,0 +1,29 @@
+{% extends "admin/layout.njk" %}
+{% block content %}
+<div class="table-toolbar">
+  <a href="/admin/events/new" class="btn-admin-primary">+ New Event</a>
+</div>
+<div class="table-wrap">
+  <table class="admin-table">
+    <thead><tr><th>Event Name</th><th>Date</th><th>Muhurat</th><th>Active</th><th>Actions</th></tr></thead>
+    <tbody>
+      {% for item in rows %}
+      <tr>
+        <td><strong>{{ item.event_name }}</strong></td>
+        <td>{{ item.event_date | dateformat }}{% if item.day_name %} ({{ item.day_name }}){% endif %}</td>
+        <td>{{ item.mahurat_time or '—' }}</td>
+        <td>{% if item.is_active %}<span class="badge-yes">Active</span>{% else %}<span class="badge-no">Hidden</span>{% endif %}</td>
+        <td class="actions">
+          <a href="/admin/events/{{ item.id }}/edit" class="btn-sm">Edit</a>
+          <form method="POST" action="/admin/events/{{ item.id }}/delete" style="display:inline;" onsubmit="return confirm('Delete?')">
+            <button type="submit" class="btn-sm btn-danger">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {% else %}
+      <tr><td colspan="5" class="empty-row">No events found.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

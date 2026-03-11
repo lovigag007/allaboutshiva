@@ -1,0 +1,36 @@
+{% extends "admin/layout.njk" %}
+{% block content %}
+<form method="POST" action="/admin/events{% if not isNew %}/{{ item.id }}{% endif %}" class="admin-form">
+  <div class="form-row">
+    <div class="form-group" style="flex:2">
+      <label>Event Name *</label>
+      <input type="text" name="event_name" value="{{ item.event_name }}" required class="form-control" placeholder="e.g. Maha Shivratri 2026">
+    </div>
+    <div class="form-group">
+      <label>Day Name</label>
+      <input type="text" name="day_name" value="{{ item.day_name }}" class="form-control" placeholder="e.g. Monday">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <label>Event Date *</label>
+      <input type="date" name="event_date" value="{{ item.event_date | string | truncate(10, true, '') }}" required class="form-control">
+    </div>
+    <div class="form-group" style="flex:2">
+      <label>Muhurat / Auspicious Time</label>
+      <input type="text" name="mahurat_time" value="{{ item.mahurat_time }}" class="form-control" placeholder="e.g. 12:09 AM to 1:00 AM">
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Description</label>
+    <textarea name="description" class="form-control" rows="4">{{ item.description }}</textarea>
+  </div>
+  <div class="form-group form-check">
+    <label><input type="checkbox" name="is_active" {% if item.is_active or isNew %}checked{% endif %}> Show on homepage</label>
+  </div>
+  <div class="form-actions">
+    <button type="submit" class="btn-admin-primary">{% if isNew %}Create Event{% else %}Update Event{% endif %}</button>
+    <a href="/admin/events" class="btn-admin-outline">Cancel</a>
+  </div>
+</form>
+{% endblock %}

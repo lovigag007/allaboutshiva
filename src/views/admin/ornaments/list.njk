@@ -1,0 +1,33 @@
+{% extends "admin/layout.njk" %}
+{% block content %}
+<div class="table-toolbar">
+  <form method="GET" class="search-bar">
+    <input type="text" name="search" value="{{ search }}" placeholder="Search ornaments…" class="form-control">
+    <button type="submit" class="btn-admin-primary">Search</button>
+    {% if search %}<a href="/admin/ornaments" class="btn-admin-outline">Clear</a>{% endif %}
+  </form>
+  <a href="/admin/ornaments/new" class="btn-admin-primary">+ New Ornament</a>
+</div>
+<div class="table-wrap">
+  <table class="admin-table">
+    <thead><tr><th>Name</th><th>Body Part</th><th>Meaning</th><th>Actions</th></tr></thead>
+    <tbody>
+      {% for item in rows %}
+      <tr>
+        <td><strong>{{ item.name }}</strong></td>
+        <td><span class="badge-neutral">{{ item.body_part }}</span></td>
+        <td>{{ item.meaning | truncate(70) }}</td>
+        <td class="actions">
+          <a href="/admin/ornaments/{{ item.id }}/edit" class="btn-sm">Edit</a>
+          <form method="POST" action="/admin/ornaments/{{ item.id }}/delete" style="display:inline;" onsubmit="return confirm('Delete?')">
+            <button type="submit" class="btn-sm btn-danger">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {% else %}
+      <tr><td colspan="4" class="empty-row">No ornaments found.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

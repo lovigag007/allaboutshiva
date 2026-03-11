@@ -1,0 +1,29 @@
+{% extends "public/layout.njk" %}
+{% block content %}
+<div class="page-hero">
+  <div class="container">
+    <h1 class="page-title">Sacred Mantras</h1>
+    <p class="page-subtitle">Ancient Sanskrit chants that have echoed through the cosmos since before time began.</p>
+  </div>
+</div>
+<div class="container section">
+  <form class="search-form" method="GET" action="/mantras">
+    <input type="text" name="search" value="{{ search }}" placeholder="Search mantras…" class="search-input">
+    <button type="submit" class="btn-primary">Search</button>
+    {% if search %}<a href="/mantras" class="btn-outline">Clear</a>{% endif %}
+  </form>
+  <div class="cards-list">
+    {% for m in rows %}
+    <a href="/mantras/{{ m.id }}" class="card-item mantra-card">
+      <h3 class="card-title">{{ m.title }}</h3>
+      <div class="mantra-sanskrit">{{ m.text_sanskrit | truncate(60) }}</div>
+      <p class="card-desc">{{ m.meaning | truncate(120) }}</p>
+      {% if m.source %}<span class="card-meta">Source: {{ m.source }}</span>{% endif %}
+    </a>
+    {% else %}
+    <p class="no-results">No mantras found.</p>
+    {% endfor %}
+  </div>
+  {% include "public/partials/pagination.njk" %}
+</div>
+{% endblock %}

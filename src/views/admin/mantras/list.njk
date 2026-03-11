@@ -1,0 +1,33 @@
+{% extends "admin/layout.njk" %}
+{% block content %}
+<div class="table-toolbar">
+  <form method="GET" class="search-bar">
+    <input type="text" name="search" value="{{ search }}" placeholder="Search mantras…" class="form-control">
+    <button type="submit" class="btn-admin-primary">Search</button>
+    {% if search %}<a href="/admin/mantras" class="btn-admin-outline">Clear</a>{% endif %}
+  </form>
+  <a href="/admin/mantras/new" class="btn-admin-primary">+ New Mantra</a>
+</div>
+<div class="table-wrap">
+  <table class="admin-table">
+    <thead><tr><th>Title</th><th>Source</th><th>Featured</th><th>Actions</th></tr></thead>
+    <tbody>
+      {% for item in rows %}
+      <tr>
+        <td><strong>{{ item.title }}</strong></td>
+        <td>{{ item.source or '—' }}</td>
+        <td>{% if item.is_featured %}<span class="badge-yes">Yes</span>{% else %}<span class="badge-no">No</span>{% endif %}</td>
+        <td class="actions">
+          <a href="/admin/mantras/{{ item.id }}/edit" class="btn-sm">Edit</a>
+          <form method="POST" action="/admin/mantras/{{ item.id }}/delete" style="display:inline;" onsubmit="return confirm('Delete?')">
+            <button type="submit" class="btn-sm btn-danger">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {% else %}
+      <tr><td colspan="4" class="empty-row">No mantras found.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

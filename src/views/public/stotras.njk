@@ -1,0 +1,28 @@
+{% extends "public/layout.njk" %}
+{% block content %}
+<div class="page-hero">
+  <div class="container">
+    <h1 class="page-title">Stotras of Shiva</h1>
+    <p class="page-subtitle">Hymns of devotion — composed by saints, sages, and kings across the ages.</p>
+  </div>
+</div>
+<div class="container section">
+  <form class="search-form" method="GET" action="/stotras">
+    <input type="text" name="search" value="{{ search }}" placeholder="Search stotras…" class="search-input">
+    <button type="submit" class="btn-primary">Search</button>
+    {% if search %}<a href="/stotras" class="btn-outline">Clear</a>{% endif %}
+  </form>
+  <div class="cards-list">
+    {% for s in rows %}
+    <a href="/stotras/{{ s.id }}" class="card-item stotra-card">
+      <h3 class="card-title">{{ s.title }}</h3>
+      {% if s.written_by %}<span class="card-meta">By: {{ s.written_by }}</span>{% endif %}
+      <p class="card-desc">{{ s.meaning | truncate(140) }}</p>
+    </a>
+    {% else %}
+    <p class="no-results">No stotras found.</p>
+    {% endfor %}
+  </div>
+  {% include "public/partials/pagination.njk" %}
+</div>
+{% endblock %}

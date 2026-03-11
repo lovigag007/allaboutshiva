@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }} | All About Shiva</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<!-- NAV -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <span class="logo-om">ॐ</span>
+      <div class="logo-text">
+        <span class="logo-main">All About</span>
+        <span class="logo-sub">Shiva</span>
+      </div>
+    </a>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="site-nav" id="siteNav">
+      <ul class="nav-list">
+        <li><a href="/names" class="nav-link {% if '/names' in currentPath %}active{% endif %}">Names</a></li>
+        <li><a href="/mantras" class="nav-link {% if '/mantras' in currentPath %}active{% endif %}">Mantras</a></li>
+        <li><a href="/vedas" class="nav-link {% if '/vedas' in currentPath %}active{% endif %}">Vedas</a></li>
+        <li><a href="/stotras" class="nav-link {% if '/stotras' in currentPath %}active{% endif %}">Stotras</a></li>
+        <li><a href="/ornaments" class="nav-link {% if '/ornaments' in currentPath %}active{% endif %}">Ornaments</a></li>
+        <li class="nav-dropdown">
+          <a href="#" class="nav-link">More ▾</a>
+          <ul class="dropdown-menu">
+            <li><a href="/page/significance-of-shiva">Significance of Shiva</a></li>
+            <li><a href="/page/108-names">108 Names</a></li>
+            <li><a href="/page/about-us">About Us</a></li>
+            <li><a href="/page/contact-us">Contact Us</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  {% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-om">ॐ नमः शिवाय</div>
+    <p class="footer-tagline">Dedicated to the Eternal Mahadeva</p>
+    <div class="footer-links">
+      <a href="/page/about-us">About</a>
+      <a href="/page/contact-us">Contact</a>
+      <a href="/names">Names</a>
+      <a href="/mantras">Mantras</a>
+      <a href="/vedas">Vedas</a>
+    </div>
+    <p class="footer-copy">&copy; 2024 All About Shiva. With devotion.</p>
+  </div>
+</footer>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

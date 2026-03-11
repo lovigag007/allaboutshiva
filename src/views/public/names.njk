@@ -1,0 +1,29 @@
+{% extends "public/layout.njk" %}
+{% block content %}
+<div class="page-hero">
+  <div class="container">
+    <h1 class="page-title">Names of Shiva</h1>
+    <p class="page-subtitle">The thousand names of the Mahadeva — each a doorway to the infinite.</p>
+  </div>
+</div>
+<div class="container section">
+  <form class="search-form" method="GET" action="/names">
+    <input type="text" name="search" value="{{ search }}" placeholder="Search names or meanings…" class="search-input">
+    <button type="submit" class="btn-primary">Search</button>
+    {% if search %}<a href="/names" class="btn-outline">Clear</a>{% endif %}
+  </form>
+  <div class="names-grid">
+    {% for name in rows %}
+    <a href="/names/{{ name.id }}" class="name-card">
+      <div class="name-devanagari">ॐ</div>
+      <h3 class="name-title">{{ name.name }}</h3>
+      <span class="name-lang">{{ name.language }}</span>
+      <p class="name-meaning">{{ name.meaning | truncate(90) }}</p>
+    </a>
+    {% else %}
+    <p class="no-results">No names found{% if search %} for "{{ search }}"{% endif %}.</p>
+    {% endfor %}
+  </div>
+  {% include "public/partials/pagination.njk" %}
+</div>
+{% endblock %}

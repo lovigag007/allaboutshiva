@@ -1,0 +1,14 @@
+{% if total > limit %}
+<div class="pagination">
+  {% set totalPages = (total / limit) | round(0, 'ceil') %}
+  {% if page > 1 %}
+    <a href="?page={{ page - 1 }}{% if search %}&search={{ search }}{% endif %}" class="page-btn">‹ Prev</a>
+  {% endif %}
+  {% for p in range(1, totalPages + 1) %}
+    <a href="?page={{ p }}{% if search %}&search={{ search }}{% endif %}" class="page-btn {% if p == page %}active{% endif %}">{{ p }}</a>
+  {% endfor %}
+  {% if page < totalPages %}
+    <a href="?page={{ page + 1 }}{% if search %}&search={{ search }}{% endif %}" class="page-btn">Next ›</a>
+  {% endif %}
+</div>
+{% endif %}

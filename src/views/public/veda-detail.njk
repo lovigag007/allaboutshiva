@@ -1,0 +1,43 @@
+{% extends "public/layout.njk" %}
+{% block content %}
+<div class="container section">
+  <a href="/vedas" class="back-link">← Back to Vedas</a>
+  <article class="detail-page">
+    <header class="detail-header">
+      <div class="detail-om">📜</div>
+      <h1 class="detail-title">{{ veda.name }}</h1>
+      <span class="detail-meta">{{ veda.meaning }} • {{ veda.timeline }}</span>
+    </header>
+    <div class="detail-body">
+      {% if veda.description %}
+      <section class="detail-section">
+        <h2>About the {{ veda.name }}</h2>
+        <div class="detail-story">{{ veda.description | nl2br | safe }}</div>
+      </section>
+      {% endif %}
+      {% if veda.incidents and veda.incidents.length > 0 %}
+      <section class="detail-section">
+        <h2>Major Incidents & References</h2>
+        {% for incident in veda.incidents %}
+        <div class="incident-card">
+          <h3>{{ incident.title }}</h3>
+          <p>{{ incident.content | nl2br | safe }}</p>
+        </div>
+        {% endfor %}
+      </section>
+      {% endif %}
+      {% if veda.stories and veda.stories.length > 0 %}
+      <section class="detail-section">
+        <h2>Famous Stories</h2>
+        {% for story in veda.stories %}
+        <div class="incident-card story-card">
+          <h3>{{ story.title }}</h3>
+          <p>{{ story.content | nl2br | safe }}</p>
+        </div>
+        {% endfor %}
+      </section>
+      {% endif %}
+    </div>
+  </article>
+</div>
+{% endblock %}

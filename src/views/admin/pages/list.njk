@@ -1,0 +1,29 @@
+{% extends "admin/layout.njk" %}
+{% block content %}
+<div class="table-toolbar">
+  <a href="/admin/pages/new" class="btn-admin-primary">+ New Page</a>
+</div>
+<div class="table-wrap">
+  <table class="admin-table">
+    <thead><tr><th>Slug</th><th>Title</th><th>Active</th><th>Actions</th></tr></thead>
+    <tbody>
+      {% for item in rows %}
+      <tr>
+        <td><code>/page/{{ item.slug }}</code></td>
+        <td>{{ item.title }}</td>
+        <td>{% if item.is_active %}<span class="badge-yes">Active</span>{% else %}<span class="badge-no">Hidden</span>{% endif %}</td>
+        <td class="actions">
+          <a href="/page/{{ item.slug }}" target="_blank" class="btn-sm">View</a>
+          <a href="/admin/pages/{{ item.id }}/edit" class="btn-sm">Edit</a>
+          <form method="POST" action="/admin/pages/{{ item.id }}/delete" style="display:inline;" onsubmit="return confirm('Delete this page?')">
+            <button type="submit" class="btn-sm btn-danger">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {% else %}
+      <tr><td colspan="4" class="empty-row">No pages found.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

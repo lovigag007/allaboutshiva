@@ -1,0 +1,31 @@
+{% extends "admin/layout.njk" %}
+{% block content %}
+<form method="POST" action="/admin/ornaments{% if not isNew %}/{{ item.id }}{% endif %}" class="admin-form">
+  <div class="form-row">
+    <div class="form-group" style="flex:2">
+      <label>Ornament Name *</label>
+      <input type="text" name="name" value="{{ item.name }}" required class="form-control" placeholder="e.g. Trishula">
+    </div>
+    <div class="form-group" style="flex:1.5">
+      <label>Body Part / Location *</label>
+      <input type="text" name="body_part" value="{{ item.body_part }}" required class="form-control" placeholder="e.g. Right Hand, Forehead, Neck">
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Meaning & Significance *</label>
+    <textarea name="meaning" required class="form-control" rows="5">{{ item.meaning }}</textarea>
+  </div>
+  <div class="form-group">
+    <label>Story Behind It</label>
+    <textarea name="story" class="form-control" rows="7">{{ item.story }}</textarea>
+  </div>
+  <div class="form-group">
+    <label>Sort Order</label>
+    <input type="number" name="sort_order" value="{{ item.sort_order or 0 }}" class="form-control" style="width:100px">
+  </div>
+  <div class="form-actions">
+    <button type="submit" class="btn-admin-primary">{% if isNew %}Create Ornament{% else %}Update Ornament{% endif %}</button>
+    <a href="/admin/ornaments" class="btn-admin-outline">Cancel</a>
+  </div>
+</form>
+{% endblock %}

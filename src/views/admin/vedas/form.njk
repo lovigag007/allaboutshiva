@@ -1,0 +1,74 @@
+{% extends "admin/layout.njk" %}
+{% block content %}
+<form method="POST" action="/admin/vedas/{{ veda.id }}" class="admin-form">
+  <div class="form-group">
+    <label>Veda Name</label>
+    <input type="text" value="{{ veda.name }}" disabled class="form-control" style="opacity:0.6">
+  </div>
+  <div class="form-group">
+    <label>Meaning *</label>
+    <input type="text" name="meaning" value="{{ veda.meaning }}" required class="form-control">
+  </div>
+  <div class="form-group">
+    <label>Timeline *</label>
+    <input type="text" name="timeline" value="{{ veda.timeline }}" required class="form-control">
+  </div>
+  <div class="form-group">
+    <label>Description / Overview</label>
+    <textarea name="description" class="form-control" rows="8">{{ veda.description }}</textarea>
+  </div>
+
+  <h3 style="margin:2rem 0 1rem; border-bottom:1px solid var(--border); padding-bottom:.5rem">Incidents & Stories</h3>
+  <p style="color:var(--muted); margin-bottom:1.5rem; font-size:.9rem">Add major incidents (type: incident) or famous stories (type: story) associated with this Veda and Shiva.</p>
+
+  <div id="incidents-container">
+    {% set allItems = (veda.incidents or []).concat(veda.stories or []) %}
+    {% for inc in allItems %}
+    <div class="incident-row">
+      <div class="form-row">
+        <div class="form-group" style="flex:2">
+          <label>Title</label>
+          <input type="text" name="inc_title" value="{{ inc.title }}" class="form-control">
+        </div>
+        <div class="form-group" style="flex:1">
+          <label>Type</label>
+          <select name="inc_type" class="form-control">
+            <option value="incident" {% if inc.type == 'incident' %}selected{% endif %}>Incident</option>
+            <option value="story" {% if inc.type == 'story' %}selected{% endif %}>Story</option>
+          </select>
+        </div>
+        <button type="button" class="btn-sm btn-danger remove-incident" style="align-self:flex-end; margin-bottom:.5rem">Remove</button>
+      </div>
+      <div class="form-group">
+        <label>Content</label>
+        <textarea name="inc_content" class="form-control" rows="4">{{ inc.content }}</textarea>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <button type="button" id="add-incident" class="btn-admin-outline" style="margin-bottom:2rem">+ Add Incident / Story</button>
+
+  <div class="form-actions">
+    <button type="submit" class="btn-admin-primary">Save Changes</button>
+    <a href="/admin/vedas" class="btn-admin-outline">Cancel</a>
+  </div>
+</form>
+
+<script>
+document.getElementById('add-incident').addEventListener('click', function() {
+  const container = document.getElementById('incidents-container');
+  const row = document.createElement('div');
+  row.className = 'incident-row';
+  row.innerHTML = `<div class="form-row">
+    <div class="form-group" style="flex:2"><label>Title</label><input type="text" name="inc_title" class="form-control"></div>
+    <div class="form-group" style="flex:1"><label>Type</label><select name="inc_type" class="form-control"><option value="incident">Incident</option><option value="story">Story</option></select></div>
+    <button type="button" class="btn-sm btn-danger remove-incident" style="align-self:flex-end;margin-bottom:.5rem">Remove</button>
+  </div>
+  <div class="form-group"><label>Content</label><textarea name="inc_content" class="form-control" rows="4"></textarea></div>`;
+  container.appendChild(row);
+  row.querySelector('.remove-incident').addEventListener('click', () => row.remove());
+});
+document.querySelectorAll('.remove-incident').forEach(btn => btn.addEventListener('click', () => btn.closest('.incident-row').remove()));
+</script>
+{% endblock %}

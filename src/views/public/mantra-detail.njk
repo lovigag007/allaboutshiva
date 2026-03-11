@@ -1,0 +1,33 @@
+{% extends "public/layout.njk" %}
+{% block content %}
+<div class="container section">
+  <a href="/mantras" class="back-link">← Back to Mantras</a>
+  <article class="detail-page">
+    <header class="detail-header">
+      <div class="detail-om">🕉️</div>
+      <h1 class="detail-title">{{ mantra.title }}</h1>
+      {% if mantra.source %}<span class="detail-meta">Source: {{ mantra.source }}</span>{% endif %}
+    </header>
+    <div class="detail-body">
+      <section class="detail-section mantra-text-section">
+        <h2>Sanskrit</h2>
+        <div class="sanskrit-text">{{ mantra.text_sanskrit | nl2br | safe }}</div>
+      </section>
+      <section class="detail-section">
+        <h2>Transliteration</h2>
+        <div class="transliteration-text">{{ mantra.text_english | nl2br | safe }}</div>
+      </section>
+      <section class="detail-section">
+        <h2>Meaning</h2>
+        <p>{{ mantra.meaning | nl2br | safe }}</p>
+      </section>
+      {% if mantra.story %}
+      <section class="detail-section">
+        <h2>History & Significance</h2>
+        <div class="detail-story">{{ mantra.story | nl2br | safe }}</div>
+      </section>
+      {% endif %}
+    </div>
+  </article>
+</div>
+{% endblock %}

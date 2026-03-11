@@ -1,0 +1,19 @@
+{% extends "admin/layout.njk" %}
+{% block content %}
+<p class="admin-note">The four Vedas are fixed entries. You can edit their content, meaning, timeline, and add incidents/stories.</p>
+<div class="table-wrap">
+  <table class="admin-table">
+    <thead><tr><th>Veda</th><th>Meaning</th><th>Timeline</th><th>Actions</th></tr></thead>
+    <tbody>
+      {% for veda in vedas %}
+      <tr>
+        <td><strong>{{ veda.name }}</strong></td>
+        <td>{{ veda.meaning | truncate(50) }}</td>
+        <td>{{ veda.timeline | truncate(40) }}</td>
+        <td><a href="/admin/vedas/{{ veda.id }}/edit" class="btn-sm">Edit</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

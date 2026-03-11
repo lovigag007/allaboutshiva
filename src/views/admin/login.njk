@@ -1,0 +1,28 @@
+{% extends "admin/layout-plain.njk" %}
+{% block content %}
+<div class="login-container">
+  <div class="login-card">
+    <div class="login-brand">
+      <div class="login-om">ॐ</div>
+      <h1>All About Shiva</h1>
+      <p>Admin Panel</p>
+    </div>
+    {% if flash_error and flash_error.length > 0 %}
+      {% for msg in flash_error %}
+      <div class="alert alert-error">{{ msg }}</div>
+      {% endfor %}
+    {% endif %}
+    <form method="POST" action="/admin/login" class="login-form">
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" required autocomplete="email" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required autocomplete="current-password" class="form-control">
+      </div>
+      <button type="submit" class="btn-admin-primary full-width">Sign In</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

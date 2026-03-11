@@ -1,0 +1,22 @@
+{% extends "public/layout.njk" %}
+{% block content %}
+<div class="page-hero">
+  <div class="container">
+    <h1 class="page-title">The Four Sacred Vedas</h1>
+    <p class="page-subtitle">The eternal scriptures — the breath of Brahman, the foundation of all knowledge.</p>
+  </div>
+</div>
+<div class="container section">
+  <div class="vedas-grid">
+    {% for veda in vedas %}
+    <a href="/vedas/{{ veda.name | lower }}" class="veda-card">
+      <div class="veda-number">{{ loop.index }}</div>
+      <h2 class="veda-name">{{ veda.name }}</h2>
+      <p class="veda-meaning">{{ veda.meaning }}</p>
+      <p class="veda-timeline">{{ veda.timeline }}</p>
+      <span class="veda-explore">Explore →</span>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

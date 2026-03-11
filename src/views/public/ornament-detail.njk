@@ -1,0 +1,25 @@
+{% extends "public/layout.njk" %}
+{% block content %}
+<div class="container section">
+  <a href="/ornaments" class="back-link">← Back to Ornaments</a>
+  <article class="detail-page">
+    <header class="detail-header">
+      <div class="detail-om">🌙</div>
+      <h1 class="detail-title">{{ ornament.name }}</h1>
+      <span class="detail-meta">Location: {{ ornament.body_part }}</span>
+    </header>
+    <div class="detail-body">
+      <section class="detail-section">
+        <h2>Meaning & Significance</h2>
+        <p class="detail-meaning">{{ ornament.meaning | nl2br | safe }}</p>
+      </section>
+      {% if ornament.story %}
+      <section class="detail-section">
+        <h2>The Story</h2>
+        <div class="detail-story">{{ ornament.story | nl2br | safe }}</div>
+      </section>
+      {% endif %}
+    </div>
+  </article>
+</div>
+{% endblock %}
